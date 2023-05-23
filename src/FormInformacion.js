@@ -1,5 +1,6 @@
 import React from 'react';
 import {Box, Card, CardContent, FormControl, InputLabel, MenuItem, Select, Stack, TextField} from "@mui/material";
+import {SelectChangeEvent} from "@mui/material";
 
 const FormInformacion = () => {
 
@@ -12,7 +13,7 @@ const FormInformacion = () => {
     return (
         <Card>
             <CardContent>
-                    <Box spacing={2}>
+                    <Box spacing={3}>
                         <Stack direction={'row'}>
                             Sistema de Coordenadas :
                             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>

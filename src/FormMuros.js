@@ -1,22 +1,37 @@
-import React from 'react';
-import {Box, Card, CardContent, Stack, TextField} from "@mui/material";
+import React, {useState} from 'react';
+import {Box, Card, CardContent, FormControl, MenuItem, Select, Stack, TextField} from "@mui/material";
+import {SelectChangeEvent} from "@mui/material";
 
 const FormMuros = () =>{
+
+    const [age, setAge] = useState('');
+
+    const handleChange = (event: SelectChangeEvent) => {
+        setAge(event.target.value);
+    };
+
+
+
     return(
         <Card>
             <CardContent>
-                <Stack direction={'row'} >
-                    <h3>ID del Muro</h3><h3>Materialidad</h3>
+                <Select
+                    labelId="demo-simple-select-standard-label"
+                    id="demo-simple-select-standard"
+                    value={age}
+                    onChange={handleChange}
+                    label="Age"
+                >
+                    <MenuItem value="">
+                        <em>None</em>
+                    </MenuItem>
+
+                </Select>
 
 
-
-                </Stack>
             </CardContent>
-
-
-
         </Card>
 
-    )
-}
+    );
+};
 export default FormMuros;

@@ -13,6 +13,7 @@ import FormPerfiles from "./FormPerfiles";
 import FormDrenajes from "./FormDrenajes";
 import FormLista from "./FormLista";
 import FormPlanos from "./FormPlanos";
+import {Stack} from "@mui/material";
 
 const steps = [
     "Información",
@@ -140,6 +141,13 @@ const ModStepper2 = () => {
                                     </Typography>
                                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                                         ¿Esta seguro(a) que desea enviar la configuracion a revision de la autoridad?
+                                        <Stack spacing={30} direction="row">
+
+                                            <Button>Enviar</Button>
+                                            <Button>Volver</Button>
+
+                                        </Stack>
+
                                     </Typography>
                                 </Box>
                             </Modal>
