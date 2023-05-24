@@ -35,27 +35,38 @@ const style2 = {
     boxShadow: 24,
     p: 4,
 };
-const stepStyle ={
-    boxShadow: '0 2px 10px 0 rgba(0,0,0,.12)',
-    backgroundColor: '#fff',
-    padding:2,
-    " .Mui-active": {
-        " .MuiStepIcon-root": {
-            color: '#1976d1',
-            fontsize: "10rem",
-        }
+const stepStyle = {
+    padding: 2,
+    ".MuiStepButton-active": {
+        ".MuiStepIcon-root": {
+            color: "#1976d1",
+            fontSize: "10rem",
+        },
     },
-    " .Mui-completed":{
-        " .MuiStepIcon-root":{
-            color: '#4cae50',
-        }
-    }
-}
+    ".MuiStepButton-completed": {
+        ".MuiStepIcon-root": {
+            color: "#4cae50",
+        },
+    },
+};
+
+const rejectedStepStyle = {
+    ...stepStyle,
+    ".MuiStepButton-completed": {
+        ".MuiStepIcon-root": {
+            color: "#d90c0c",
+        },
+    },
+};
+
+
+
 
 const ModStepper2 = () => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState({});
     const [open, setOpen] = React.useState(false);
+    const [currentStepStyle, setCurrentStepStyle] = React.useState(stepStyle);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -80,6 +91,7 @@ const ModStepper2 = () => {
     const allStepsCompleted = () => {
         return completedSteps() === totalSteps();
     };
+
 
     const handleNext = () => {
         const newActiveStep =
@@ -106,13 +118,25 @@ const ModStepper2 = () => {
     };
 
 
+    const handleReject = () => {
+        handleComplete();
+        setCurrentStepStyle(rejectedStepStyle);
+    };
+
+
 
     return (
         <Box sx={{ width: '100%' }}>
-            <Stepper alternativeLabel nonLinear activeStep={activeStep} sx={stepStyle}>
+            <Stepper  sx={currentStepStyle} alternativeLabel nonLinear activeStep={activeStep} >
                 {steps.map((label, index) => (
-                    <Step key={label} completed={completed[index]}>
-                        <StepButton color="inherit" onClick={handleStep(index)}>
+                    <Step key={label}  >
+                        <StepButton
+                            color="inherit"
+                            onClick={handleStep(index)}
+                            completed={completed[index]}
+
+
+                        >
                             {label}
                         </StepButton>
                     </Step>
@@ -120,6 +144,7 @@ const ModStepper2 = () => {
             </Stepper>
             <div>
                 {allStepsCompleted() ? (
+
                     <React.Fragment>
                         Aceptada
                         <Typography sx={{ mt: 2, mb: 1 }}>
@@ -154,6 +179,7 @@ const ModStepper2 = () => {
 
                         </Box>
                     </React.Fragment>
+
                 ) : (
                     <React.Fragment>
                         <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
@@ -164,14 +190,13 @@ const ModStepper2 = () => {
                             {activeStep + 1 === 5 && (<FormDrenajes />)}
                             {activeStep + 1 === 6 && (<FormPlanos />)}
                             {activeStep + 1 === 7 && (<FormLista />)}
-
-
                         </Typography>
+
                         <Box style={{display:'flex', flexDirection: 'row'}}>
                             <Button onClick={handleComplete}>
                                 Aceptar
                             </Button>
-                            <Button>
+                            <Button onClick={handleReject}>
                                 Rechazar
                             </Button>
                         </Box>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Card, CardContent, FormControl, InputLabel, MenuItem, Select, Stack, TextField} from "@mui/material";
+import {Box, Card, CardContent, FormControl, MenuItem, Select, Stack, TextField} from "@mui/material";
 import {SelectChangeEvent} from "@mui/material";
 
 const FormInformacion = () => {
